@@ -764,6 +764,11 @@
               <FileType>5</FileType>
               <FilePath>.\hardware\NRF2401.h</FilePath>
             </File>
+            <File>
+              <FileName>NFR2401_FRONT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware\NFR2401_FRONT.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

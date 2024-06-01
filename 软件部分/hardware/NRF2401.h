@@ -1,5 +1,5 @@
-#ifndef __W25Q64_H
-#define __W25Q64_H
+#ifndef __NRF2401_H
+#define __NRF2401_H
 
 void NRF2401_Init(void);
 

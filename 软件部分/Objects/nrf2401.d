@@ -29,3 +29,4 @@
 .\objects\nrf2401.o: .\library\stm32f10x_wwdg.h
 .\objects\nrf2401.o: .\library\misc.h
 .\objects\nrf2401.o: hardware\MySPI.h
+.\objects\nrf2401.o: hardware\NFR2401_FRONT.h
