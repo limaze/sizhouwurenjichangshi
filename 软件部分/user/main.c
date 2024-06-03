@@ -6,6 +6,7 @@
 #include "NRF2401.h"
 #include "EXTI.h"
 #include "EXTI2.h"
+#include "MOTOR.h"
 
 float Pitch,Roll,Yaw;								//俯仰角默认跟中值一样，翻滚角，偏航角
 int16_t ax,ay,az,gx,gy,gz;							//加速度，陀螺仪角速度
@@ -21,6 +22,7 @@ int main(void)
 	NRF2401_Init();
 	EXTI1_Init();
 	EXTI2_Init();
+	Motor_Init();
 	while(1)
 	{
 		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);				//读取姿态信息(其中偏航角有飘移是正常现象)

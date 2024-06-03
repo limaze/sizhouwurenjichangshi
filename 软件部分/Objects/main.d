@@ -44,3 +44,4 @@
 .\objects\main.o: .\hardware\NRF2401.h
 .\objects\main.o: .\system\EXTI.h
 .\objects\main.o: .\system\EXTI2.h
+.\objects\main.o: .\hardware\MOTOR.h
