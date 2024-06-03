@@ -1,4 +1,5 @@
 .\objects\nrf2401.o: hardware\NRF2401.c
+.\objects\nrf2401.o: hardware\NRF2401.h
 .\objects\nrf2401.o: .\start\stm32f10x.h
 .\objects\nrf2401.o: .\start\core_cm3.h
 .\objects\nrf2401.o: D:\keil\ARM\ARMCC\Bin\..\include\stdint.h
@@ -28,5 +29,6 @@
 .\objects\nrf2401.o: .\library\stm32f10x_usart.h
 .\objects\nrf2401.o: .\library\stm32f10x_wwdg.h
 .\objects\nrf2401.o: .\library\misc.h
-.\objects\nrf2401.o: hardware\MySPI.h
 .\objects\nrf2401.o: hardware\NFR2401_FRONT.h
+.\objects\nrf2401.o: hardware\MySPI.h
+.\objects\nrf2401.o: .\system\Delay.h

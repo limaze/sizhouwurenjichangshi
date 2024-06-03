@@ -1,6 +1,6 @@
 #include "stm32f10x.h"                  // Device header
 
-void MySPI_W_SS(uint8_t BitValue)
+void MySPI_W_CE(uint8_t BitValue)
 {
 	GPIO_WriteBit(GPIOA, GPIO_Pin_4, (BitAction)BitValue);
 }
@@ -37,17 +37,17 @@ void MySPI_Init(void)
 
 	SPI_Cmd(SPI1,ENABLE);
 	
-	MySPI_W_SS(1);
+	MySPI_W_CE(1);
 }
 
 void MySPI_start(void)
 {
-	MySPI_W_SS(0);
+	MySPI_W_CE(0);
 }
 
 void MySPI_stop(void)
 {
-	MySPI_W_SS(1);
+	MySPI_W_CE(1);
 }
 
 uint8_t MySPI_swapbyte(uint8_t byt)

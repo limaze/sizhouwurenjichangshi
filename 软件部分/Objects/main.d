@@ -42,6 +42,7 @@
 .\objects\main.o: .\hardware\Mpu6050\MPU6050_I2C.h
 .\objects\main.o: .\hardware\Mpu6050\inv_mpu.h
 .\objects\main.o: .\hardware\NRF2401.h
+.\objects\main.o: .\hardware\NFR2401_FRONT.h
 .\objects\main.o: .\system\EXTI.h
 .\objects\main.o: .\system\EXTI2.h
 .\objects\main.o: .\hardware\MOTOR.h
