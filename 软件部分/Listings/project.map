@@ -2002,7 +2002,7 @@ Image Symbol Table
     MPU_Set_LPF                              0x08000e1b   Thumb Code    60  mpu6050.o(i.MPU_Set_LPF)
     MPU_Set_Rate                             0x08000e57   Thumb Code    56  mpu6050.o(i.MPU_Set_Rate)
     MemManage_Handler                        0x08000e8f   Thumb Code     4  stm32f10x_it.o(i.MemManage_Handler)
-    Motor_Init                               0x08000e95   Thumb Code    78  motor.o(i.Motor_Init)
+    Motor_Init                               0x08000e95   Thumb Code    80  motor.o(i.Motor_Init)
     MySPI_Init                               0x08000eed   Thumb Code   174  myspi.o(i.MySPI_Init)
     MySPI_W_SS                               0x08000fa5   Thumb Code    16  myspi.o(i.MySPI_W_SS)
     My_GPIO_Init                             0x08000fb9   Thumb Code   172  sys.o(i.My_GPIO_Init)
@@ -2475,7 +2475,7 @@ Image component sizes
       3092        124       3062          0         16      19794   inv_mpu_dmp_motion_driver.o
        302         60          0         24          0       1770   main.o
        112         12          0          0          0     204208   misc.o
-        88         10          0          0          0        493   motor.o
+        88          8          0          0          0        493   motor.o
        626          0          0          0          0       6917   mpu6050.o
        544         76          0          0          0       4760   mpu6050_i2c.o
        204         14          0          0          0       1094   myspi.o
@@ -2493,7 +2493,7 @@ Image component sizes
        328         28          0          0          0      14585   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-     15282        730       4934         80       1552     593292   Object Totals
+     15282        728       4934         80       1552     593292   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         20          0          4          3          0          0   (incl. Padding)
 
@@ -2585,9 +2585,9 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     22722       1264       5174         80       1648     588756   Grand Totals
-     22722       1264       5174         80       1648     588756   ELF Image Totals
-     22722       1264       5174         80          0          0   ROM Totals
+     22722       1262       5174         80       1648     588756   Grand Totals
+     22722       1262       5174         80       1648     588756   ELF Image Totals
+     22722       1262       5174         80          0          0   ROM Totals
 
 ==============================================================================
 
