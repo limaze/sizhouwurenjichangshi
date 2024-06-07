@@ -7,6 +7,8 @@
 #include "EXTI.h"
 #include "EXTI2.h"
 #include "MOTOR.h"
+#include "NRF2401.h"
+#include "MS5611.h"
 
 float Pitch,Roll,Yaw;								//俯仰角默认跟中值一样，翻滚角，偏航角
 int16_t ax,ay,az,gx,gy,gz;							//加速度，陀螺仪角速度

@@ -37,6 +37,7 @@
 ".\objects\nrf2401.o"
 ".\objects\motor.o"
 ".\objects\pwm.o"
+".\objects\ms5611.o"
 ".\objects\main.o"
 ".\objects\stm32f10x_it.o"
 ".\objects\inv_mpu.o"
