@@ -729,6 +729,16 @@
               <FileType>1</FileType>
               <FilePath>.\hardware\MySPI.c</FilePath>
             </File>
+            <File>
+              <FileName>AD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware\AD.c</FilePath>
+            </File>
+            <File>
+              <FileName>AD.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware\AD.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
