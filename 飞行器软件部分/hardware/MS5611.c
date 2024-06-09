@@ -41,7 +41,7 @@ void MS5611_RESET(void)
     MyI2C_Stop();
 }
 
-uint8_t MS5611_init(void)
+uint8_t MS5611_Init(void)
  {	 
   uint8_t  inth,intl;
   int i;
@@ -133,3 +133,19 @@ void MS5611_getPressure(void)
 	MSbaro_h = 44330*(1-pow(((double)(yali))/((double)(101325)),1.0/5.255));
 }
 
+double xddaodu(void)
+{
+	uint8_t i;
+	double cyl=0;
+	for(i=0;i<100;i++)
+	{
+		MS5611_getPressure();
+		cyl+=MSbaro_h;
+	}
+	return cyl/100.0;
+}
+
+double gaodu(void)
+{
+	return MSbaro_h-xddaodu();
+}
