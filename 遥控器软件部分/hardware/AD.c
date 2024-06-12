@@ -1,6 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 
-uint16_t AD_value[3];
+int16_t AD_value[2];
+int16_t ADs_value[2];
 
 void AD_Init(void)
 {
@@ -28,7 +29,7 @@ void AD_Init(void)
 	ADC_Init(ADC1,&ADC_InitStucture);
 	
 	DMA_InitTypeDef DMAInitStructure;
-	DMAInitStructure.DMA_BufferSize=2;
+	DMAInitStructure.DMA_BufferSize=3;
 	DMAInitStructure.DMA_DIR=DMA_DIR_PeripheralSRC;
 	DMAInitStructure.DMA_M2M=DMA_M2M_Disable;
 	DMAInitStructure.DMA_MemoryBaseAddr=(uint32_t)&AD_value;
@@ -52,4 +53,16 @@ void AD_Init(void)
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1)==SET);
 	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
+}
+
+int16_t ADx_huoqu(void)//获取摇杆的左右摇晃
+{
+	ADs_value[0]=AD_value[0]/4095*100;
+	return ADs_value[0];
+}
+
+int16_t ADy_huoqu(void)//获取摇杆的前后摇晃
+{
+	ADs_value[1]=AD_value[1]/4095*100;
+	return ADs_value[1];
 }

@@ -30,3 +30,7 @@
 .\objects\main.o: .\library\misc.h
 .\objects\main.o: .\system\Delay.h
 .\objects\main.o: .\hardware\OLED.h
+.\objects\main.o: .\hardware\AD.h
+.\objects\main.o: .\hardware\Key.h
+.\objects\main.o: .\hardware\NRF2401.h
+.\objects\main.o: .\hardware\NFR2401_FRONT.h
