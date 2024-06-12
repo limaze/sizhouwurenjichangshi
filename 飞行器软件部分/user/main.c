@@ -16,6 +16,10 @@ int16_t ax,ay,az,gx,gy,gz;							//加速度，陀螺仪角速度
 u8 MPU_Get_Gyroscope(short *gx,short *gy,short *gz);
 u8 MPU_Get_Accelerometer(short *ax,short *ay,short *az);
 
+float Kp,Ki,Kd;//直立环参数
+float VKp,VKi;//速度环参数
+float TKp,TKd;//转向环的参数
+
 int main(void)
 {
 	OLED_Init();

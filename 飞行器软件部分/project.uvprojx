@@ -799,6 +799,16 @@
               <FileType>5</FileType>
               <FilePath>.\hardware\MS5611.h</FilePath>
             </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hardware\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware\pid.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
