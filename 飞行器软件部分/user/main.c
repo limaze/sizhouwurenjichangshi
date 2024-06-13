@@ -22,6 +22,7 @@ float TKp,TKd;//转向环的参数
 
 float zzlshiji,zzllilun,zhongzhi=0;
 float czlshiji,czllilun;
+int tlilun,tshiji=0;
 
 int main(void)
 {
@@ -32,11 +33,9 @@ int main(void)
 	EXTI1_Init();
 	EXTI2_Init();
 	Motor_Init();
+	Set_RXMode();
 	while(1)
 	{
-		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);				//读取姿态信息(其中偏航角有飘移是正常现象)
-		MPU_Get_Gyroscope(&gx,&gy,&gz);
-		MPU_Get_Accelerometer(&ax,&ay,&az);
 		OLED_ShowSignedNum(2, 1, Pitch, 5);
 		OLED_ShowSignedNum(3, 1, Roll, 5);
 		OLED_ShowSignedNum(4, 1, Yaw, 5);
@@ -48,21 +47,35 @@ int main(void)
 
 void EXTI15_10_IRQHandler(void)
 {
-	int pwm_zhuan,pwm1_out,pwm2_out;
+	int pwm_zhuan,pwm_out,pwm1_out,pwm2_out,pwm3_out,pwm4_out;
 	if(EXTI_GetITStatus(EXTI_Line13)==SET)
 	{
 		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);				
 		MPU_Get_Gyroscope(&gx,&gy,&gz);
 		zzlshiji=Roll;
 		zzllilun=zhongzhi;
-		pwm1_out=zzhilihuan(zzllilun,zzlshiji);
+		pwm_out=zzhilihuan(zzllilun,zzlshiji);
 		czlshiji=Pitch;
 		czllilun=zhongzhi;
-		pwm2_out=czhilihuan(czllilun,czlshiji);
+		pwm_out=czhilihuan(czllilun,czlshiji);
+		pwm_zhuan=zhuanxianghuan(tlilun,tshiji);
+		if(tlilun-tshiji>=0)
+		{
+			pwm1_out=pwm4_out=pwm_out+pwm_zhuan;
+			pwm2_out=pwm3_out=pwm_out-pwm_zhuan;
+		}
+		else{
+			pwm1_out=pwm4_out=pwm_out-pwm_zhuan;
+			pwm2_out=pwm3_out=pwm_out+pwm_zhuan;
+		}
 		pwxianfu(7000,&pwm1_out);
 		pwxianfu(7000,&pwm2_out);
+		pwxianfu(7000,&pwm3_out);
+		pwxianfu(7000,&pwm4_out);
 		SETPWM_1(pwm1_out);
 		SETPWM_2(pwm2_out);
+		SETPWM_3(pwm3_out);
+		SETPWM_4(pwm4_out);
 		EXTI_ClearITPendingBit(EXTI_Line13);
 	}
 }
