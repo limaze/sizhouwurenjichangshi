@@ -48,3 +48,4 @@
 .\objects\main.o: .\hardware\MOTOR.h
 .\objects\main.o: .\hardware\MS5611.h
 .\objects\main.o: .\hardware\MyI2C.h
+.\objects\main.o: .\hardware\PID.h

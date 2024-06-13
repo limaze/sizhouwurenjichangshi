@@ -7,8 +7,8 @@
 #include "EXTI.h"
 #include "EXTI2.h"
 #include "MOTOR.h"
-#include "NRF2401.h"
 #include "MS5611.h"
+#include "PID.h"
 
 float Pitch,Roll,Yaw;								//俯仰角默认跟中值一样，翻滚角，偏航角
 int16_t ax,ay,az,gx,gy,gz;							//加速度，陀螺仪角速度
@@ -16,9 +16,12 @@ int16_t ax,ay,az,gx,gy,gz;							//加速度，陀螺仪角速度
 u8 MPU_Get_Gyroscope(short *gx,short *gy,short *gz);
 u8 MPU_Get_Accelerometer(short *ax,short *ay,short *az);
 
-float Kp,Ki,Kd;//直立环参数
-float VKp,VKi;//速度环参数
+float Kp,Ki,Kd;//正向直立环参数
+float Kdp,Kdi,Kdd;//侧向直立环参数
 float TKp,TKd;//转向环的参数
+
+float zzlshiji,zzllilun,zhongzhi=0;
+float czlshiji,czllilun;
 
 int main(void)
 {
@@ -45,10 +48,21 @@ int main(void)
 
 void EXTI15_10_IRQHandler(void)
 {
+	int pwm_zhuan,pwm1_out,pwm2_out;
 	if(EXTI_GetITStatus(EXTI_Line13)==SET)
 	{
 		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);				
 		MPU_Get_Gyroscope(&gx,&gy,&gz);
+		zzlshiji=Roll;
+		zzllilun=zhongzhi;
+		pwm1_out=zzhilihuan(zzllilun,zzlshiji);
+		czlshiji=Pitch;
+		czllilun=zhongzhi;
+		pwm2_out=czhilihuan(czllilun,czlshiji);
+		pwxianfu(7000,&pwm1_out);
+		pwxianfu(7000,&pwm2_out);
+		SETPWM_1(pwm1_out);
+		SETPWM_2(pwm2_out);
 		EXTI_ClearITPendingBit(EXTI_Line13);
 	}
 }
