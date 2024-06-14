@@ -4,9 +4,9 @@
 #include "stm32f10x.h"                  // Device header
 
 uint8_t over_flag(float jiaodu);
-void Xianfu(int max);
 int zzhilihuan(float lilun,float shiji);
 int czhilihuan(float lilun,float shiji);
 int zhuanxianghuan(int tlilun,int tshiji);
+int gdkz(double lilun,double shiji);
 
 #endif

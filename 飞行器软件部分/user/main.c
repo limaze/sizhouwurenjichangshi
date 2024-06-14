@@ -20,9 +20,12 @@ float Kp,Ki,Kd;//正向直立环参数
 float Kdp,Kdi,Kdd;//侧向直立环参数
 float TKp,TKd;//转向环的参数
 
-float zzlshiji,zzllilun,zhongzhi=0;
-float czlshiji,czllilun;
-int tlilun,tshiji=0;
+float zzlshiji,zzllilun,zhongzhi=0;//正向直立环实际值和理论值
+float czlshiji,czllilun;//侧向直立环实际值和理论值
+int tlilun,tshiji=0;//转向环理论值和实际值
+double hshiji,hlilun;//无人机所处高度实际值和理论值
+
+uint8_t mingling;//对传回的数据进行接收
 
 int main(void)
 {
@@ -42,6 +45,15 @@ int main(void)
 		OLED_ShowSignedNum(2, 8, gx, 5);
 		OLED_ShowSignedNum(3, 8, gy, 5);
 		OLED_ShowSignedNum(4, 8, gz, 5);
+//		switch(mingling)
+//		{
+//			case 1:qianjin;break;
+//			case 2:houtui;break;
+//			case 3:xiangzuo;break;
+//			case 4:xiangyou;break;
+//			case 5:xiangqian;break;
+//			case 6:xianghou;break;
+//		}
 	}
 }
 
@@ -52,21 +64,47 @@ void EXTI15_10_IRQHandler(void)
 	{
 		MPU6050_DMP_Get_Data(&Pitch,&Roll,&Yaw);				
 		MPU_Get_Gyroscope(&gx,&gy,&gz);
+		hshiji=gaodu();
+		pwm_out=gdkz(hlilun,hshiji);
 		zzlshiji=Roll;
 		zzllilun=zhongzhi;
-		pwm_out=zzhilihuan(zzllilun,zzlshiji);
+		if(zzlshiji>zzllilun)
+		{
+			pwm2_out=pwm4_out=pwm_out-zzhilihuan(zzllilun,zzlshiji);
+			pwm1_out=pwm3_out=pwm_out+zzhilihuan(zzllilun,zzlshiji);
+		}
+		else{
+			pwm1_out=pwm3_out=pwm_out-zzhilihuan(zzllilun,zzlshiji);
+			pwm2_out=pwm4_out=pwm_out+zzhilihuan(zzllilun,zzlshiji);
+		}
 		czlshiji=Pitch;
 		czllilun=zhongzhi;
-		pwm_out=czhilihuan(czllilun,czlshiji);
+		if(czlshiji>czllilun)
+		{
+			pwm3_out-=zzhilihuan(zzllilun,zzlshiji);
+			pwm4_out-=zzhilihuan(zzllilun,zzlshiji);
+			pwm1_out+=zzhilihuan(zzllilun,zzlshiji);
+			pwm2_out+=zzhilihuan(zzllilun,zzlshiji);
+		}
+		else{
+			pwm3_out+=zzhilihuan(zzllilun,zzlshiji);
+			pwm4_out+=zzhilihuan(zzllilun,zzlshiji);
+			pwm1_out-=zzhilihuan(zzllilun,zzlshiji);
+			pwm2_out-=zzhilihuan(zzllilun,zzlshiji);
+		}
 		pwm_zhuan=zhuanxianghuan(tlilun,tshiji);
 		if(tlilun-tshiji>=0)
 		{
-			pwm1_out=pwm4_out=pwm_out+pwm_zhuan;
-			pwm2_out=pwm3_out=pwm_out-pwm_zhuan;
+			pwm1_out+=pwm_zhuan;
+			pwm4_out+=pwm_zhuan;
+			pwm2_out-=pwm_zhuan;
+			pwm3_out-=pwm_zhuan;
 		}
 		else{
-			pwm1_out=pwm4_out=pwm_out-pwm_zhuan;
-			pwm2_out=pwm3_out=pwm_out+pwm_zhuan;
+			pwm1_out-=pwm_zhuan;
+			pwm4_out-=pwm_zhuan;
+			pwm2_out+=pwm_zhuan;
+			pwm3_out+=pwm_zhuan;
 		}
 		pwxianfu(7000,&pwm1_out);
 		pwxianfu(7000,&pwm2_out);
@@ -82,9 +120,13 @@ void EXTI15_10_IRQHandler(void)
 
 void EXTI9_5_IRQHandler(void)
 {
+	uint8_t a;
 	if(EXTI_GetITStatus(EXTI_Line9)==SET)
 	{
-		
+		if(NRF2401_RXPACKER(&a)==0x40)
+		{
+			mingling=a;
+		}
 		EXTI_ClearITPendingBit(EXTI_Line9);
 	}
 }
