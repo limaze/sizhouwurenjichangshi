@@ -37,14 +37,12 @@ int main(void)
 	EXTI2_Init();
 	Motor_Init();
 	Set_RXMode();
+	MS5611_Init();
 	while(1)
 	{
-		OLED_ShowSignedNum(2, 1, Pitch, 5);
-		OLED_ShowSignedNum(3, 1, Roll, 5);
-		OLED_ShowSignedNum(4, 1, Yaw, 5);
-		OLED_ShowSignedNum(2, 8, gx, 5);
-		OLED_ShowSignedNum(3, 8, gy, 5);
-		OLED_ShowSignedNum(4, 8, gz, 5);
+		hshiji=gaodu();
+		OLED_ShowNum(2, 1, hshiji, 5);
+		OLED_ShowNum(3, 1, Roll, 5);
 //		switch(mingling)
 //		{
 //			case 1:qianjin;break;
